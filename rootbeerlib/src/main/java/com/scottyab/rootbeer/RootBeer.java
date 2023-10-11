@@ -21,6 +21,12 @@ import java.util.Scanner;
 import static com.scottyab.rootbeer.Const.BINARY_BUSYBOX;
 import static com.scottyab.rootbeer.Const.BINARY_SU;
 
+class CustomException extends Exception {
+    CustomException(String errorMessage) {
+        super(errorMessage);
+    }
+}
+
 /**
  * A simple root checker that gives an *indication* if the device is rooted or
  * not.
@@ -328,14 +334,8 @@ public class RootBeer {
                 }
             }
             return result;
-        } catch (IOException e) {
-            System.out.println("IOException checkForDangerousProps");
-            return true;
-        } catch (NoSuchElementException e) {
-            System.out.println("NoSuchElementException checkForDangerousProps");
-            return true;
-        } catch (CustomException e) {
-            System.out.println("CustomException checkForDangerousProps");
+        } catch (Exception e) {
+            System.out.println("Exception checkForDangerousProps");
             return true;
         }
     }
