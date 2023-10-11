@@ -256,7 +256,7 @@ public class RootBeer {
         } catch (IOException | NoSuchElementException e) {
             QLog.e(e);
             System.out.println("propsReader Efectivamente me toteo");
-            return null;
+            throw e;
         }
     }
 
@@ -304,35 +304,35 @@ public class RootBeer {
      * @return - true if dangerous props are found
      */
     public boolean checkForDangerousProps() {
+        try {
+            final Map<String, String> dangerousProps = new HashMap<>();
+            dangerousProps.put("ro.debuggable", "1");
+            dangerousProps.put("ro.secure", "0");
 
-        final Map<String, String> dangerousProps = new HashMap<>();
-        dangerousProps.put("ro.debuggable", "1");
-        dangerousProps.put("ro.secure", "0");
+            boolean result = false;
 
-        boolean result = false;
+            String[] lines = propsReader();
+            System.out.println("Antes dle lines");
+            System.out.println(lines);
 
-        String[] lines = propsReader();
-        System.out.println("Antes dle lines");
-        System.out.println(lines);
-
-        if (lines == null) {
-            // Could not read, assume false;
-            return false;
-        }
-
-        for (String line : lines) {
-            for (String key : dangerousProps.keySet()) {
-                if (line.contains(key)) {
-                    String badValue = dangerousProps.get(key);
-                    badValue = "[" + badValue + "]";
-                    if (line.contains(badValue)) {
-                        QLog.v(key + " = " + badValue + " detected!");
-                        result = true;
+            for (String line : lines) {
+                for (String key : dangerousProps.keySet()) {
+                    if (line.contains(key)) {
+                        String badValue = dangerousProps.get(key);
+                        badValue = "[" + badValue + "]";
+                        if (line.contains(badValue)) {
+                            QLog.v(key + " = " + badValue + " detected!");
+                            result = true;
+                        }
                     }
                 }
             }
+            return result;
+        } catch (IOException | NoSuchElementException e) {
+            System.out.println("Entro al error de checkForDangerousProps");
+            QLog.e(e);
+            return true;
         }
-        return result;
     }
 
     /**
