@@ -256,7 +256,7 @@ public class RootBeer {
         } catch (IOException | NoSuchElementException e) {
             QLog.e(e);
             System.out.println("propsReader Efectivamente me toteo");
-            throw new Exception("propsReader error");
+            throw new CustomException("propsReader error");
         } 
     }
 
