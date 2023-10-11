@@ -253,9 +253,13 @@ public class RootBeer {
             String propVal = scanner.next();
             System.out.println("propVal = " + propVal);
             return propVal.split("\n");
-        } catch (IOException | NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             QLog.e(e);
-            System.out.println("propsReader Efectivamente me toteo");
+            System.out.println("propsReader NoSuchElementException Efectivamente me toteo");
+            throw e;
+        } catch (IOException e) {
+            QLog.e(e);
+            System.out.println("propsReader IOException Efectivamente me toteo");
             throw e;
         }
     }
