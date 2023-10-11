@@ -257,7 +257,7 @@ public class RootBeer {
             QLog.e(e);
             System.out.println("propsReader Efectivamente me toteo");
             throw new CustomException("propsReader error");
-        } 
+        }
     }
 
     private String[] mountReader() {
@@ -328,9 +328,14 @@ public class RootBeer {
                 }
             }
             return result;
-        } catch (IOException | NoSuchElementException e) {
-            System.out.println("Entro al error de checkForDangerousProps");
-            QLog.e(e);
+        } catch (IOException e) {
+            System.out.println("IOException checkForDangerousProps");
+            return true;
+        } catch (NoSuchElementException e) {
+            System.out.println("NoSuchElementException checkForDangerousProps");
+            return true;
+        } catch (CustomException e) {
+            System.out.println("CustomException checkForDangerousProps");
             return true;
         }
     }
