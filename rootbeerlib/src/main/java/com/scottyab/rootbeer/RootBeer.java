@@ -21,11 +21,6 @@ import java.util.Scanner;
 import static com.scottyab.rootbeer.Const.BINARY_BUSYBOX;
 import static com.scottyab.rootbeer.Const.BINARY_SU;
 
-class CustomException extends Exception {
-    CustomException(String errorMessage) {
-        super(errorMessage);
-    }
-}
 
 /**
  * A simple root checker that gives an *indication* if the device is rooted or
@@ -262,7 +257,7 @@ public class RootBeer {
         } catch (IOException | NoSuchElementException e) {
             QLog.e(e);
             System.out.println("propsReader Efectivamente me toteo");
-            throw new CustomException("propsReader error");
+            throw new Exception("propsReader error");
         }
     }
 
