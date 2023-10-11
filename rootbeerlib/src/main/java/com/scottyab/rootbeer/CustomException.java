@@ -1,7 +1,7 @@
 package com.scottyab.rootbeer;
 
-final class CustomException extends Exception {
-    CustomException(String errorMessage) {
+public class CustomException extends Exception {
+    public CustomException(String errorMessage) {
         super(errorMessage);
     }
 }
