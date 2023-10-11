@@ -215,6 +215,7 @@ public class RootBeer {
             return propVal.split("\n");
         } catch (IOException | NoSuchElementException e) {
             QLog.e(e);
+            System. out. println("propsReader Efectivamente me toteo");
             return null;
         }
     }
@@ -268,6 +269,9 @@ public class RootBeer {
         boolean result = false;
 
         String[] lines = propsReader();
+        System.out.println("Antes dle lines");
+        System.out.println(lines);
+
 
         if (lines == null){
             // Could not read, assume false;
