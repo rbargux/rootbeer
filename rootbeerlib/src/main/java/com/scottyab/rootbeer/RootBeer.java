@@ -21,7 +21,6 @@ import java.util.Scanner;
 import static com.scottyab.rootbeer.Const.BINARY_BUSYBOX;
 import static com.scottyab.rootbeer.Const.BINARY_SU;
 
-
 /**
  * A simple root checker that gives an *indication* if the device is rooted or
  * not.
@@ -243,7 +242,7 @@ public class RootBeer {
         QLog.LOGGING_LEVEL = logging ? QLog.ALL : QLog.NONE;
     }
 
-    private String[] propsReader() {
+    private String[] propsReader() throws Exception {
         try {
             InputStream inputstream = Runtime.getRuntime().exec("getprop").getInputStream();
             if (inputstream == null)
